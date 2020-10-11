@@ -33,19 +33,14 @@ class ShowNotBlankLineNumbers(LineFilter):
 
 
 class SqueezeBlankLines(LineFilter):
-    lastLine = ""
+    lastLine = False
 
     def run(self, line: str, index: int = -1):
-
-        if index == 0:
-            self.lastLine = line
-
-        if not self.lastLine and not line:
+        if self.lastLine and line == "\n":
             return ""
 
-        ret = self.lastLine
-        self.lastLine = line
-        return ret
+        self.lastLine = line[-1] == "\n"
+        return line
 
 
 COMBINE_OPTIONS = dict(showAllFlag=["showTabsFlag", "showEndFlag"])
@@ -75,16 +70,13 @@ class Pipeline:
                 kwargs.update({item: True for item in COMBINE_OPTIONS[option]})
 
         for k, v in kwargs.items():
-            if v and issubclass(
-                filterType := PIPLINES.get(k, {}).get(v, object), LineFilter
-            ):
+            if v and issubclass(filterType := PIPLINES.get(k, {}).get(v, object), LineFilter):
                 self.linePipeline.append(filterType())
 
         self.linePipeline.sort(key=lambda x: PRIORITY.index(type(x)))
 
         def lineProcessor(line: str, index: int = -1):
             for filter in self.linePipeline:
-                # click.secho(f"{filter=} {line=} {index=}", fg="green")
                 line = filter.run(line, index)
             return line
 
