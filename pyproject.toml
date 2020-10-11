@@ -21,6 +21,24 @@ rope = "^0.18.0"
 [tool.poetry.scripts]
 u-cat = 'u_coreutils.cat:run'
 
+[tool.pylint.master]
+job = 0
+suggestion-mode = "yes"
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.pylint.basic]
+function-naming-style = "any"
+variable-naming-style = "any"
+attr-naming-style = "any"
+
+[tool.pylint.message_control]
+disable = ["missing-docstring"]
+
+[tool.pylint.design]
+min-public-methods = 1
+
 [tool.pytest.ini_options]
 addopts = "-ra -svv --cov=u_coreutils"
 minversion = "6.0"
