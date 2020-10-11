@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "u-coreutils"
-version = "0.1.0"
-description = ""
+version = "0.1.1"
+description = "GNU coreutils implementation with Python 3.8"
 authors = ["duyixian <duyixian1234@qq.com>"]
 
 [tool.poetry.dependencies]

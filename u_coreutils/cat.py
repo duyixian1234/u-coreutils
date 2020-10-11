@@ -32,7 +32,7 @@ class ShowNotBlankLineNumbers(LineFilter):
     def run(self, line: str, index: int = -1):
         if line != "\n":
             self.lineIndex += 1
-            return f"{self.lineIndex+1:{LINE_NUMBER_WIDTH}}  {line}"
+            return f"{self.lineIndex:{LINE_NUMBER_WIDTH}}  {line}"
         else:
             return line
 
