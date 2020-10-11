@@ -28,8 +28,7 @@ class ShowNotBlankLineNumbers(LineFilter):
         if line != "\n":
             self.lineIndex += 1
             return f"{self.lineIndex:{LINE_NUMBER_WIDTH}}  {line}"
-        else:
-            return line
+        return line
 
 
 class SqueezeBlankLines(LineFilter):
@@ -76,8 +75,8 @@ class Pipeline:
         self.linePipeline.sort(key=lambda x: PRIORITY.index(type(x)))
 
         def lineProcessor(line: str, index: int = -1):
-            for filter in self.linePipeline:
-                line = filter.run(line, index)
+            for _filter in self.linePipeline:
+                line = _filter.run(line, index)
             return line
 
         self.lineProcessor = lineProcessor

@@ -27,9 +27,7 @@ from .pipeline import Pipeline
     flag_value=True,
     help="display $ at end of each line",
 )
-@click.option(
-    "-n", "--number", "showLineNumberFlag", flag_value=1, help="number all output lines"
-)
+@click.option("-n", "--number", "showLineNumberFlag", flag_value=1, help="number all output lines")
 @click.option(
     "-s",
     "--squeeze-blank",
@@ -65,7 +63,7 @@ def cat(files, **kwargs):
 
 
 def run():
-    cat()
+    cat()  # pylint: disable=no-value-for-parameter
 
 
 __all__ = ["run"]
