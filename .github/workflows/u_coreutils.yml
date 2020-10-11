@@ -27,10 +27,10 @@ jobs:
         poetry update
     - name: Lint with pylint
       run: |
-        pylint u_coreutils
+        poetry run pylint u_coreutils
     - name: Check type
       run: |
-        mypy u_coreutils
+        poetry run mypy u_coreutils
     - name: Test with pytest
       run: |
-        pytest
+        poetry run pytest
