@@ -2,51 +2,70 @@ from typing import List
 
 import click
 
+# pylint: disable=anomalous-backslash-in-string
+ESCAPES = {"a": "\a", "b": "\b", "e": "\e", "f": "\f", "n": "\n", "r": "\r", "t": "\t", "v": "\v", "\\": "\\"}
+
+
+def getChar(data: dict):
+    if not data["value"]:
+        return ""
+    ret = data["value"][0]
+    data["value"] = data["value"][1:]
+    return ret
+
+
+def escape(string: str):
+    data = {"value": string}
+    ret = []
+    while char := getChar(data):
+        if char == "\\" and data["value"]:
+            char = getChar(data)
+            if char in ESCAPES:
+                ret.append(ESCAPES[char])
+            elif char == "c":
+                break
+        else:
+            ret.append(char)
+    return "".join(ret)
+
 
 @click.command()
+@click.option("-n", "noNewLineFlag", flag_value=True, help="do not output the trailing newline")
+@click.option("-e", "escapeFlag", flag_value=True, help="enable interpretation of backslash escapes", default=False)
+@click.option("-E", "escapeFlag", flag_value=False, help="disable interpretation of backslash escapes (default)")
 @click.argument("strings", nargs=-1)
-def echo(strings: List[str]):
-    r"""Echo the STRING(s) to standard output."""
+def echo(strings: List[str], escapeFlag: bool, noNewLineFlag: bool):
+    r"""Echo the STRING(s) to standard output.
 
-    #    -n     do not output the trailing newline
+    If -e is in effect, the following sequences are recognized:
 
-    #    -e     enable interpretation of backslash escapes
+    \\     backslash
 
-    #    -E     disable interpretation of backslash escapes (default)
+    \a     alert (BEL)
 
-    #    --help display this help and exit
+    \b     backspace
 
-    #    --version
-    #           output version information and exit
+    \c     produce no further output
 
-    #    If -e is in effect, the following sequences are recognized:
+    \e     escape
 
-    #    \\     backslash
+    \f     form feed
 
-    #    \a     alert (BEL)
+    \n     new line
 
-    #    \b     backspace
+    \r     carriage return
 
-    #    \c     produce no further output
+    \t     horizontal tab
 
-    #    \e     escape
+    \v     vertical tab"""
+    # \0NNN  byte with octal value NNN (1 to 3 digits)
 
-    #    \f     form feed
-
-    #    \n     new line
-
-    #    \r     carriage return
-
-    #    \t     horizontal tab
-
-    #    \v     vertical tab
-
-    #    \0NNN  byte with octal value NNN (1 to 3 digits)
-
-    #    \xHH   byte with hexadecimal value HH (1 to 2 digits)
+    # \xHH   byte with hexadecimal value HH (1 to 2 digits)
     # """
+    if escapeFlag:
+        strings = [escape(string) for string in strings]
     ret = " ".join(strings)
-    click.echo(ret)
+    click.echo(ret, nl=not noNewLineFlag)
 
 
 def run():

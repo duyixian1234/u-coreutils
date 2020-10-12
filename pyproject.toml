@@ -30,9 +30,10 @@ suggestion-mode = "yes"
 max-line-length = 120
 
 [tool.pylint.basic]
+argument-naming-style = "any"
+attr-naming-style = "any"
 function-naming-style = "any"
 variable-naming-style = "any"
-attr-naming-style = "any"
 
 [tool.pylint.message_control]
 disable = ["missing-docstring"]
