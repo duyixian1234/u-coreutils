@@ -4,7 +4,6 @@ from u_coreutils.cat import cat
 
 def test_cat():
     runner = CliRunner()
-    result = runner.invoke(cat, ["Peter"])
     with runner.isolated_filesystem():
         with open("hello.txt", "w") as f:
             f.write("Hello World!")
