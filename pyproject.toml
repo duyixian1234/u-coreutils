@@ -1,11 +1,11 @@
 [tool.poetry]
 authors = ["duyixian <duyixian1234@qq.com>"]
 description = "GNU coreutils implementation with Python 3.8"
-name = "u-coreutils"
-version = "0.1.4"
-readme = "README.md"
 license = "MIT"
+name = "u-coreutils"
+readme = "README.md"
 repository = "https://github.com/duyixian1234/u-coreutils"
+version = "0.1.5"
 
 [tool.poetry.dependencies]
 click = "^7.1.2"
