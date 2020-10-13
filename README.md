@@ -7,3 +7,17 @@ GNU coreutils implementation with Python 3.8
 ## Tools
 
 ✔ cat
+✔ echo
+
+## INSTALL
+
+```shell
+pip install -U u_coreutils
+```
+
+## USE
+
+```shell
+u-cat a.txt
+u-echo -e -n 'Hello,World!\n'
+```

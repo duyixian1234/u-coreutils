@@ -4,6 +4,7 @@ import click
 
 # pylint: disable=anomalous-backslash-in-string
 ESCAPES = {"a": "\a", "b": "\b", "e": "\e", "f": "\f", "n": "\n", "r": "\r", "t": "\t", "v": "\v", "\\": "\\"}
+CODES = {"0": (8, 3, 3), "x": (16, 2, 4)}
 
 
 def getChar(data: dict):
@@ -14,6 +15,25 @@ def getChar(data: dict):
     return ret
 
 
+def addChar(data: dict, char: str):
+    data["value"] = char + data["value"]
+
+
+def parseCode(data: dict, base: int, maxDigits: int, bitsPerDigit: int):
+    ret = 0
+    for _ in range(maxDigits):
+        if char := getChar(data):
+            try:
+                digit = int(char, base)
+                ret = (ret << bitsPerDigit) | digit
+            except ValueError:
+                addChar(data, char)
+                break
+        else:
+            break
+    return chr(ret)
+
+
 def escape(string: str):
     data = {"value": string}
     ret = []
@@ -22,6 +42,8 @@ def escape(string: str):
             char = getChar(data)
             if char in ESCAPES:
                 ret.append(ESCAPES[char])
+            if char in CODES:
+                ret.append(parseCode(data, *CODES[char]))
             elif char == "c":
                 break
         else:
@@ -57,11 +79,12 @@ def echo(strings: List[str], escapeFlag: bool, noNewLineFlag: bool):
 
     \t     horizontal tab
 
-    \v     vertical tab"""
-    # \0NNN  byte with octal value NNN (1 to 3 digits)
+    \v     vertical tab
 
-    # \xHH   byte with hexadecimal value HH (1 to 2 digits)
-    # """
+    \0NNN  byte with octal value NNN (1 to 3 digits)
+
+    \xHH   byte with hexadecimal value HH (1 to 2 digits)
+    """
     if escapeFlag:
         strings = [escape(string) for string in strings]
     ret = " ".join(strings)
