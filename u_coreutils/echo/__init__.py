@@ -55,8 +55,8 @@ def escape(string: str):
 @click.option("-n", "noNewLineFlag", flag_value=True, help="do not output the trailing newline")
 @click.option("-e", "escapeFlag", flag_value=True, help="enable interpretation of backslash escapes", default=False)
 @click.option("-E", "escapeFlag", flag_value=False, help="disable interpretation of backslash escapes (default)")
-@click.argument("strings", nargs=-1)
-def echo(strings: List[str], escapeFlag: bool, noNewLineFlag: bool):
+@click.argument("string", required=True, nargs=-1)
+def echo(string: List[str], escapeFlag: bool, noNewLineFlag: bool):
     r"""Echo the STRING(s) to standard output.
 
     If -e is in effect, the following sequences are recognized:
@@ -86,8 +86,8 @@ def echo(strings: List[str], escapeFlag: bool, noNewLineFlag: bool):
     \xHH   byte with hexadecimal value HH (1 to 2 digits)
     """
     if escapeFlag:
-        strings = [escape(string) for string in strings]
-    ret = " ".join(strings)
+        string = [escape(s) for s in string]
+    ret = " ".join(string)
     click.echo(ret, nl=not noNewLineFlag)
 
 

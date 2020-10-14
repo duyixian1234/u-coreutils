@@ -42,14 +42,14 @@ from .pipeline import Pipeline
     flag_value=True,
     help="Display TAB characters as ^I",
 )
-@click.argument("files", nargs=-1, type=click.Path(exists=True))
-def cat(files, **kwargs):
+@click.argument("file", required=True, nargs=-1, type=click.Path(exists=True, readable=True))
+def cat(file, **kwargs):
     """concatenate files and print on the standard output"""
     pipeline = Pipeline(**kwargs)
     index = 0
     lastLine = ""
-    for file in files:
-        with Path(file).open() as f:
+    for _file in file:
+        with Path(_file).open() as f:
             while line := f.readline():
                 if not lastLine.endswith("\n"):
                     lastLine += line
