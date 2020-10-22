@@ -5,7 +5,7 @@ license = "MIT"
 name = "u-coreutils"
 readme = "README.md"
 repository = "https://github.com/duyixian1234/u-coreutils"
-version = "0.1.6"
+version = "0.1.7"
 
 [tool.poetry.dependencies]
 click = "^7.1.2"
@@ -25,6 +25,7 @@ rope = "^0.18.0"
 u-cat = 'u_coreutils.cat:run'
 u-echo = 'u_coreutils.echo:run'
 u-head = 'u_coreutils.head:run'
+u-mkdir = 'u_coreutils.mkdir:run'
 
 [tool.pylint.master]
 job = 0

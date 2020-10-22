@@ -12,6 +12,8 @@ GNU coreutils implementation with Python 3.8
 
 ✔ head
 
+✔ mkdir
+
 ## INSTALL
 
 ```shell
@@ -24,4 +26,5 @@ pip install -U u_coreutils
 u-cat a.txt
 u-echo -e -n 'Hello,World!\n'
 u-head -n 5 a.txt
+u-mkdir -p -v a/b/c/d
 ```
