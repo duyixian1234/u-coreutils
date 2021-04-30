@@ -20,7 +20,7 @@ def fromFile(file: str) -> bytes:
         click.echo(f"u-base64: {file}: No such file or directory")
         sys.exit(1)
     if not path.is_file():
-        click.echo(f"u-base64: Read Error: It's directory")
+        click.echo("u-base64: Read Error: It's directory")
         sys.exit(1)
     return path.read_bytes()
 
