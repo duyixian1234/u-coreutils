@@ -27,8 +27,10 @@ def test_mkdir():
 
         result = runner.invoke(mkdir, ["a/b/c/d"])
         assert result.exit_code == 1
-        assert result.output == "mkdir: a/b/c: No such file or directory\n"
+        assert result.output == f"mkdir: {Path('a/b/c')}: No such file or directory\n"
 
         result = runner.invoke(mkdir, ["-p", "-v", "b/c/d"])
         assert result.exit_code == 0
-        assert result.output == "mkdir: created directory 'b/c'\nmkdir: created directory 'b/c/d'\n"
+        assert (
+            result.output == f"mkdir: created directory '{Path('b/c')}'\nmkdir: created directory '{Path('b/c/d')}'\n"
+        )
