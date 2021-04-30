@@ -14,6 +14,10 @@ GNU coreutils implementation with Python 3.8
 
 ✔ mkdir
 
+✔ false
+
+✔ base64
+
 ## INSTALL
 
 ```shell
@@ -27,4 +31,6 @@ u-cat a.txt
 u-echo -e -n 'Hello,World!\n'
 u-head -n 5 a.txt
 u-mkdir -p -v a/b/c/d
+u-false
+u-base64 -w 100  a.txt
 ```

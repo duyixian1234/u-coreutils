@@ -22,11 +22,12 @@ pytest-xdist = "^2.1.0"
 rope = "^0.18.0"
 
 [tool.poetry.scripts]
+u-base64 = 'u_coreutils._base64:run'
 u-cat = 'u_coreutils.cat:run'
 u-echo = 'u_coreutils.echo:run'
+u-false = 'u_coreutils.false:run'
 u-head = 'u_coreutils.head:run'
 u-mkdir = 'u_coreutils.mkdir:run'
-u-false = 'u_coreutils.false:run'
 
 [tool.pylint.master]
 job = 0
