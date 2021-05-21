@@ -1,5 +1,6 @@
 from click.testing import CliRunner
-from u_coreutils.echo import echo, getChar, escape, parseCode
+
+from u_coreutils.echo import echo, escape, getChar, parseCode
 
 
 def test_echo():

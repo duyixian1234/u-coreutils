@@ -1,11 +1,6 @@
-from u_coreutils.cat.pipeline import (
-    ShowEnds,
-    ShowTabs,
-    ShowLineNumbers,
-    ShowNotBlankLineNumbers,
-    SqueezeBlankLines,
-    Pipeline,
-)
+from u_coreutils.cat.pipeline import (Pipeline, ShowEnds, ShowLineNumbers,
+                                      ShowNotBlankLineNumbers, ShowTabs,
+                                      SqueezeBlankLines)
 
 
 def test_pipeline():
